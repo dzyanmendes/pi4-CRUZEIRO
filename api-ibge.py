@@ -8,13 +8,16 @@ import pandas as pd
 from pandas import json_normalize 
 url = urllib3.PoolManager()
 urlIBGE = "https://servicodados.ibge.gov.br/api/v1/projecoes/populacao/BR"
+urlIBGE2 = "https://servicodados.ibge.gov.br/api/v1/projecoes/populacao/BR"
 response = url.request('GET', urlIBGE)
+response2 = url.request('GET', urlIBGE2)
 data_response = response.data.decode("utf-8")
+data_response = response2.data.decode("utf-8")
 data_json = json.loads(data_response)
 data_populacao = data_json["projecao"]
 data_grafico = data_json["projecao"]["periodoMedio"]
 dataUpdate = data_json["horario"]
-df= json_normalize(data_json["projecao"])
+df = json_normalize(data_json["projecao"])
 df2 = data_grafico
 st.header('SIAD - IBGE - UNIVESP')
 st.markdown('Este sistema tem por objetivo, facilitar a visualização e centralização de consultas de informações do IBGE')
